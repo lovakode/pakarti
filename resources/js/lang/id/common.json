@@ -120,6 +120,8 @@
     "choose_file": "Pilih File",
     "last_access" : "Akses Terakhir",
     "device" : "Perangkat | Perangkat",
-    "devices_connected" : "Perangkat Terhubung"
+    "devices_connected" : "Perangkat Terhubung",
+    "department_stats" : "Department Chart",
+    "status_stats" : "Status Chart"
     
 }

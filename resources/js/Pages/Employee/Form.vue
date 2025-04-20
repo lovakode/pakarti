@@ -6,7 +6,7 @@
             </div>
             <div class="mt-auto mb-0">
                 <el-breadcrumb separator="/">
-                    <el-breadcrumb-item :to="{ path: '/' }">{{ $t('base.dashboard')}}</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/' }">{{ $t('base.dashboard') }}</el-breadcrumb-item>
                     <el-breadcrumb-item :to="{ path: '/employee' }">{{ $t('base.employee', 2) }}</el-breadcrumb-item>
                     <el-breadcrumb-item>{{ $t(route.params.id ? 'common.edit' : 'common.create') }}</el-breadcrumb-item>
                 </el-breadcrumb>
@@ -22,7 +22,7 @@
                     <el-row :gutter="20" justify="space-between">
                         <el-col :md="12">
                             <el-form-item :label="$t('common.image')">
-                                <image-upload v-model="form.image" size="small"/>
+                                <image-upload v-model="form.image" size="small" />
                             </el-form-item>
                             <el-form-item :label="$t('common.name')" prop="name">
                                 <el-input v-model="form.name" />
@@ -45,9 +45,8 @@
                             <el-row :gutter="16">
                                 <el-col :md="12">
                                     <el-form-item :label="$t('employee.birth_date')" prop="birth_date">
-                                        <el-date-picker v-model="form.birth_date"
-                                        format="DD-MM-YYYY"
-                                        value-format="YYYY-MM-DD" />
+                                        <el-date-picker v-model="form.birth_date" format="DD-MM-YYYY"
+                                            value-format="YYYY-MM-DD" />
                                     </el-form-item>
                                 </el-col>
                                 <el-col :md="12">
@@ -62,24 +61,26 @@
                                 </el-col>
                                 <el-col :md="12">
                                     <el-form-item :label="$t('employee.marital_status')" prop="marital_status">
-                                        <el-select v-model="form.marital_status" class="w-full" :placeholder="$t('common.select')">
-                                            <el-option value="single" :label="$t('employee.single')"/>
-                                            <el-option value="married" :label="$t('employee.married')"/>
-                                            <el-option value="divorced" :label="$t('employee.divorced')"/>
-                                            <el-option value="widowed" :label="$t('employee.widowed')"/>
+                                        <el-select v-model="form.marital_status" class="w-full"
+                                            :placeholder="$t('common.select')">
+                                            <el-option value="single" :label="$t('employee.single')" />
+                                            <el-option value="married" :label="$t('employee.married')" />
+                                            <el-option value="divorced" :label="$t('employee.divorced')" />
+                                            <el-option value="widowed" :label="$t('employee.widowed')" />
                                         </el-select>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :md="12">
                                     <el-form-item :label="$t('employee.religion')" prop="religion">
-                                        <el-select v-model="form.religion" class="w-full" :placeholder="$t('common.select')">
-                                            <el-option value="islam" :label="$t('employee.islam')"/>
-                                            <el-option value="protestant" :label="$t('employee.protestant')"/>
-                                            <el-option value="catholic" :label="$t('employee.catholic')"/>
-                                            <el-option value="hindu" :label="$t('employee.hindu')"/>
-                                            <el-option value="buddha" :label="$t('employee.buddha')"/>
-                                            <el-option value="confucian" :label="$t('employee.confucian')"/>
-                                            <el-option value="other" :label="$t('common.other')"/>
+                                        <el-select v-model="form.religion" class="w-full"
+                                            :placeholder="$t('common.select')">
+                                            <el-option value="islam" :label="$t('employee.islam')" />
+                                            <el-option value="protestant" :label="$t('employee.protestant')" />
+                                            <el-option value="catholic" :label="$t('employee.catholic')" />
+                                            <el-option value="hindu" :label="$t('employee.hindu')" />
+                                            <el-option value="buddha" :label="$t('employee.buddha')" />
+                                            <el-option value="confucian" :label="$t('employee.confucian')" />
+                                            <el-option value="other" :label="$t('common.other')" />
                                         </el-select>
                                     </el-form-item>
                                 </el-col>
@@ -94,12 +95,13 @@
                 </div>
                 <div class="p-4">
                     <div class="border-b mb-4">
-                        <h3 class="text-lg font-semibold py-2">2. {{ $t('employee.contact_emergency_information') }}</h3>
+                        <h3 class="text-lg font-semibold py-2">2. {{ $t('employee.contact_emergency_information') }}
+                        </h3>
                     </div>
                     <el-row :gutter=20>
                         <el-col :md="12">
                             <el-form-item :label="$t('common.address')">
-                                <el-input v-model="form.addressline1" class="mb-4"/>
+                                <el-input v-model="form.addressline1" class="mb-4" />
                                 <el-input v-model="form.addressline2" />
                             </el-form-item>
                             <el-row :gutter="16">
@@ -160,12 +162,13 @@
                     <el-row :gutter="20">
                         <el-col :md="12">
                             <el-form-item :label="$t('employee.last_education')" prop="last_education">
-                                <el-select v-model="form.last_education" class="w-full" :placeholder="$t('common.select')">
-                                    <el-option value="junior_high_school" :label="$t('employee.junior_high_school')"/>
-                                    <el-option value="senior_high_school" :label="$t('employee.senior_high_school')"/>
-                                    <el-option value="diploma" :label="$t('employee.diploma')"/>
-                                    <el-option value="bachelor" :label="$t('employee.bachelor')"/>
-                                    <el-option value="master" :label="$t('employee.master')"/>
+                                <el-select v-model="form.last_education" class="w-full"
+                                    :placeholder="$t('common.select')">
+                                    <el-option value="junior_high_school" :label="$t('employee.junior_high_school')" />
+                                    <el-option value="senior_high_school" :label="$t('employee.senior_high_school')" />
+                                    <el-option value="diploma" :label="$t('employee.diploma')" />
+                                    <el-option value="bachelor" :label="$t('employee.bachelor')" />
+                                    <el-option value="master" :label="$t('employee.master')" />
                                 </el-select>
                             </el-form-item>
                             <el-form-item :label="$t('base.department')" prop="department_id">
@@ -189,24 +192,23 @@
                                 <el-input v-model="form.ptkp" />
                             </el-form-item>
                             <el-form-item :label="$t('employee.join_date')" prop="join_date">
-                                <el-date-picker v-model="form.join_date"
-                                format="DD-MM-YYYY"
-                                value-format="YYYY-MM-DD" />
+                                <el-date-picker v-model="form.join_date" format="DD-MM-YYYY"
+                                    value-format="YYYY-MM-DD" />
                             </el-form-item>
                             <el-form-item :label="$t('common.status')">
                                 <el-select v-model="form.status" class="w-full" :placeholder="$t('common.select')">
-                                    <el-option value="permanent" :label="$t('employee.permanent')"/>
-                                    <el-option value="contract" :label="$t('employee.contract')"/>
-                                    <el-option value="internship" :label="$t('employee.internship')"/>
-                                    <el-option value="resigned" :label="$t('employee.resigned')"/>
-                                    <el-option value="retired" :label="$t('employee.retired')"/>
-                                    <el-option value="passed_away" :label="$t('employee.passed_away')"/>
+                                    <el-option value="permanent" :label="$t('employee.permanent')" />
+                                    <el-option value="contract" :label="$t('employee.contract')" />
+                                    <el-option value="internship" :label="$t('employee.internship')" />
+                                    <el-option value="resigned" :label="$t('employee.resigned')" />
+                                    <el-option value="retired" :label="$t('employee.retired')" />
+                                    <el-option value="passed_away" :label="$t('employee.passed_away')" />
                                 </el-select>
                             </el-form-item>
-                            <el-form-item :label="$t('employee.exit_date')" prop="exit_date" v-if="['resigned', 'retired', 'passed_away'].includes(form.status)">
-                                <el-date-picker v-model="form.exit_date"
-                                format="DD-MM-YYYY"
-                                value-format="YYYY-MM-DD" />
+                            <el-form-item :label="$t('employee.exit_date')" prop="exit_date"
+                                v-if="['resigned', 'retired', 'passed_away'].includes(form.status)">
+                                <el-date-picker v-model="form.exit_date" format="DD-MM-YYYY"
+                                    value-format="YYYY-MM-DD" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -240,12 +242,12 @@ const { setTitle } = useHead();
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
-const title = ref(`${ t('common.add') } ${ t('base.employee') }`);
+const title = ref(`${t('common.add')} ${t('base.employee')}`);
 const tabActive = ref('general');
 const formRef = ref(null);
 const form = ref({
-    id : null,
-    image : null,
+    id: null,
+    image: null,
     code: null,
     name: null,
     email: null,
@@ -483,8 +485,8 @@ const formRules = ref({
 
 const formLoading = ref(false);
 
-const onChangeType = (v) =>{
-    if(v == 'company'){
+const onChangeType = (v) => {
+    if (v == 'company') {
         form.company_id = null;
     }
 }
@@ -533,51 +535,51 @@ const onSubmit = async () => {
 const fetchData = async () => {
     formLoading.value = true;
     await axios.get(`/employee/${route.params.id}`)
-    .then(response => {
-        const data = response.data.result;
-        
-        form.value.id = data.id;
-        form.value.image = data.image;
-        form.value.code = data.code;
-        form.value.name = data.name;
-        form.value.email = data.email;
-        form.value.birth_date = data.birth_date;
-        form.value.birth_place = data.birth_place;
-        form.value.blood_type = data.blood_type;
-        form.value.gender = data.gender;
-        form.value.marital_status = data.marital_status;
-        form.value.religion = data.religion;
-        form.value.mother_name = data.mother_name;
-        form.value.addressline1 = data.addressline1;
-        form.value.addressline2 = data.addressline2;
-        form.value.state = data.state;
-        form.value.city = data.city;
-        form.value.zipcode = data.zipcode;
-        form.value.country = data.country;
-        form.value.phone = data.phone;
-        form.value.mobile = data.mobile;
-        form.value.emergency_contact_name = data.emergency_contact_name;
-        form.value.emergency_contact_phone = data.emergency_contact_phone;
-        form.value.emergency_contact_relationship = data.emergency_contact_relationship;
-        form.value.last_education = data.last_education;
-        form.value.department_id = data.department_id;
-        form.value.subdirectorate = data.subdirectorate;
-        form.value.grade_id = data.grade_id;
-        form.value.job_position_id = data.job_position_id;
-        form.value.superior_id = data.superior_id;
-        form.value.status = data.status;
-        form.value.ptkp = data.ptkp;
-        form.value.join_date = data.join_date;
-        form.value.exit_date = data.exit_date;
-        form.value.expertise_id = data.expertise_id;
-    })
-    .finally(() => {
-        formLoading.value = false;
-    });
+        .then(response => {
+            const data = response.data.result;
+
+            form.value.id = data.id;
+            form.value.image = data.image;
+            form.value.code = data.code;
+            form.value.name = data.name;
+            form.value.email = data.email;
+            form.value.birth_date = data.birth_date;
+            form.value.birth_place = data.birth_place;
+            form.value.blood_type = data.blood_type;
+            form.value.gender = data.gender;
+            form.value.marital_status = data.marital_status;
+            form.value.religion = data.religion;
+            form.value.mother_name = data.mother_name;
+            form.value.addressline1 = data.addressline1;
+            form.value.addressline2 = data.addressline2;
+            form.value.state = data.state;
+            form.value.city = data.city;
+            form.value.zipcode = data.zipcode;
+            form.value.country = data.country;
+            form.value.phone = data.phone;
+            form.value.mobile = data.mobile;
+            form.value.emergency_contact_name = data.emergency_contact_name;
+            form.value.emergency_contact_phone = data.emergency_contact_phone;
+            form.value.emergency_contact_relationship = data.emergency_contact_relationship;
+            form.value.last_education = data.last_education;
+            form.value.department_id = data.department_id;
+            form.value.subdirectorate = data.subdirectorate;
+            form.value.grade_id = data.grade_id;
+            form.value.job_position_id = data.job_position_id;
+            form.value.superior_id = data.superior_id;
+            form.value.status = data.status;
+            form.value.ptkp = data.ptkp;
+            form.value.join_date = data.join_date;
+            form.value.exit_date = data.exit_date;
+            form.value.expertise_id = data.expertise_id;
+        })
+        .finally(() => {
+            formLoading.value = false;
+        });
 };
 onMounted(() => {
-    if(route.params.id){
-        title.value = `${ t('common.edit') } ${ t('base.employee') }`;
+    if (route.params.id) {
+        title.value = `${t('common.edit')} ${t('base.employee')}`;
         fetchData();
     }
     setTitle(title.value);

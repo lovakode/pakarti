@@ -2,23 +2,23 @@
     <div class="content">
         <div class="content-header">
             <div class="mt-auto mb-0">
-                <div class="text-lg font-semibold">{{ $t('base.dashboard',2) }}</div>
+                <div class="text-lg font-semibold">{{ $t('base.dashboard', 2) }}</div>
             </div>
             <div class="mt-auto mb-0">
-                
+
             </div>
         </div>
 
-        
+
         <el-row :gutter="20">
-            <el-col :md="24">
-                <employee-dept-chart class="mb-5"/>
+            <el-col :md="24" v-if="can('department_stats', 'dashboard')">
+                <employee-dept-chart class="mb-5" />
+            </el-col>
+            <el-col :md="24" v-if="can('status_stats', 'dashboard')">
+                <employee-status-chart class="mb-5" />
             </el-col>
             <el-col :md="24">
-                <employee-status-chart class="mb-5"/>
-            </el-col>
-            <el-col :md="24">
-                <department-tree class="mb-5"/>
+                <department-tree class="mb-5" />
             </el-col>
         </el-row>
 
@@ -33,9 +33,12 @@ import EmployeeJoinChart from '@/Components/Chart/EmployeeJoinChart.vue';
 import EmployeeDeptChart from '@/Components/Chart/EmployeeDeptChart.vue';
 import EmployeeStatusChart from '@/Components/Chart/EmployeeStatusChart.vue';
 import DepartmentTree from '@/Components/DepartmentTree.vue';
+import { useAbility } from '@casl/vue';
+
 
 const { t } = useI18n();
-const { setTitle } = useHead(); 
+const { setTitle } = useHead();
+const { can } = useAbility();
 
 onMounted(() => {
     setTitle(t('base.dashboard'));

@@ -120,5 +120,7 @@
     "choose_file" : "Choose File",
     "last_access" : "Last Access",
     "device" : "Device | Devices",
-    "devices_connected" : "Devices Connected"
+    "devices_connected" : "Devices Connected",
+    "department_stats" : "Department Chart",
+    "status_stats" : "Status Chart"
 }

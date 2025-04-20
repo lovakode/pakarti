@@ -4,10 +4,12 @@
             <h2 class="content-title">{{ title }}</h2>
             <div class="md:flex hidden items-center gap-2.5 text-sm font-semibold">
                 <el-breadcrumb separator="/">
-                    <el-breadcrumb-item :to="{ path: '/' }">{{ $t('base.dashboard')}}</el-breadcrumb-item>
-                    <el-breadcrumb-item :to="{ path: '/settings/system' }">{{ $t('base.setting',2)}}</el-breadcrumb-item>
-                    <el-breadcrumb-item :to="{ path: '/settings/user' }">{{ $t('base.user',2)}}</el-breadcrumb-item>
-                    <el-breadcrumb-item>{{ route.params.id ? $t('common.edit') :$t('common.create') }}</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/' }">{{ $t('base.dashboard') }}</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/settings/system' }">{{
+                        $t('base.setting', 2) }}</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/settings/user' }">{{ $t('base.user', 2) }}</el-breadcrumb-item>
+                    <el-breadcrumb-item>{{ route.params.id ? $t('common.edit') : $t('common.create')
+                    }}</el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
         </div>
@@ -17,27 +19,27 @@
                     <el-row :gutter="20">
                         <el-col :md="12">
                             <el-form-item :label="$t('common.image')">
-                                <image-upload v-model="form.image" size="small"/>
+                                <image-upload v-model="form.image" size="small" />
                             </el-form-item>
                             <el-form-item :label="$t('base.employee')" prop="employee_id">
-                                <select-employee v-model="form.employee_id" @change="fetchEmployee"/>
+                                <select-employee v-model="form.employee_id" @change="fetchEmployee" />
                             </el-form-item>
                             <el-form-item :label="$t('common.name')" prop="name">
-                                <el-input v-model="form.name" :readonly="form.employee_id"/>
+                                <el-input v-model="form.name" :readonly="form.employee_id" />
                             </el-form-item>
                         </el-col>
                         <el-col :md="12">
                             <el-form-item :label="$t('common.email')" prop="email">
-                                <el-input v-model="form.email" :readonly="form.employee_id"/>
+                                <el-input v-model="form.email" :readonly="form.employee_id" />
                             </el-form-item>
                             <el-form-item :label="$t('base.role')" prop="role">
-                                <select-role v-model="form.role"/>
+                                <select-role v-model="form.role" />
                             </el-form-item>
                             <el-form-item :label="$t('common.password')" prop="password">
-                                <el-input v-model="form.password" type="password" show-password/>
+                                <el-input v-model="form.password" type="password" show-password />
                             </el-form-item>
                             <el-form-item :label="$t('common.password_confirmation')" prop="password_confirmation">
-                                <el-input v-model="form.password_confirmation" type="password" show-password/>
+                                <el-input v-model="form.password_confirmation" type="password" show-password />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -70,16 +72,16 @@ const { setTitle } = useHead();
 const route = useRoute();
 const router = useRouter();
 
-const title = ref(`${ t('common.create') } ${t('base.user')}`);
+const title = ref(`${t('common.create')} ${t('base.user')}`);
 const form = ref({
     id: route.params.id ? route.params.id : null,
     name: '',
-    username : '',
-    email : '',
-    password : '',
-    password_confirmation : '',
-    role : null,
-    image : null,
+    username: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+    role: null,
+    image: null,
 });
 
 const formRef = ref(null);
@@ -99,19 +101,21 @@ const formRules = ref({
     ],
     password_confirmation: [
         { required: true, message: t('validation.required', { attribute: t('common.password_confirmation') }), trigger: 'blur' },
-        { validator: (rule, value, callback) => {
-            if (value !== form.value.password) {
-                callback(new Error(t('validation.password_mismatch')));
-            } else {
-                callback();
-            }
-        }, trigger: 'blur' },
+        {
+            validator: (rule, value, callback) => {
+                if (value !== form.value.password) {
+                    callback(new Error(t('validation.password_mismatch')));
+                } else {
+                    callback();
+                }
+            }, trigger: 'blur'
+        },
     ],
 })
 const isLoading = ref(false);
 
 const fetchEmployee = async (v) => {
-    if(v){
+    if (v) {
         try {
             isLoading.value = true;
             const response = await axios.get(`/employee/${v}`);
@@ -127,7 +131,7 @@ const fetchEmployee = async (v) => {
         } catch (error) {
             console.error(error);
         }
-    }else{
+    } else {
         form.value.name = null;
         form.value.email = null;
     }
@@ -158,9 +162,9 @@ const onSubmit = async () => {
         if (valid) {
             try {
                 isLoading.value = true;
-                const url = form.value.id ? 
-                `/settings/user/${form.value.id}/update` : 
-                '/settings/user/store';
+                const url = form.value.id ?
+                    `/settings/user/${form.value.id}/update` :
+                    '/settings/user/store';
                 const method = form.value.id ? 'put' : 'post';
                 await axios({
                     method,
@@ -173,7 +177,7 @@ const onSubmit = async () => {
                     message: t('message.success_input'),
                     type: 'success',
                 });
-                router.replace({ path: '/settings/users' });
+                router.replace({ path: '/settings/user' });
             } catch (error) {
                 console.log(error);
                 isLoading.value = false;
@@ -192,8 +196,8 @@ const onSubmit = async () => {
 };
 
 onMounted(() => {
-    if(route.params.id){
-        title.value = `${ t('common.edit') } ${t('base.user')}`;
+    if (route.params.id) {
+        title.value = `${t('common.edit')} ${t('base.user')}`;
         fetchData();
     }
 

@@ -19,6 +19,7 @@ Route::namespace('App\Http\Controllers')->name('api.')->group(function(){
     
     Route::prefix('/base')->name('base.')->group(function () {
         Route::get('/', 'BaseController@index')->name('index');
+        Route::get('/test', 'BaseController@test')->name('test');
         Route::get('/set-lang/{lang}','BaseController@setLang');
         Route::get('/barcode', 'BaseController@barcode')->name('barcode');
         Route::get('/timezone', 'BaseController@timezone')->name('timezone');

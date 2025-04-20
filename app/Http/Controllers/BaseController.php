@@ -9,6 +9,9 @@ use App\Models\Locale;
 use App\Models\Currency;
 use App\Models\Account\Account;
 
+use App\Models\Employee;
+use App\Models\User;
+
 class BaseController extends Controller
 {
 
@@ -98,5 +101,40 @@ class BaseController extends Controller
         );
     
         return $dayjsFormat;
+    }
+
+    
+    public function test(Request $request)
+    {
+        // $user = User::where('id', '>', 3)->delete();
+        // dd($user);
+        // $user->delete();
+        // return response()->json($user, 200);
+
+        // $employees = Employee::where('id', '<', 194)->orderBy('id', "ASC")->get();
+        $employees = User::where('id', '>', 1)->orderBy('id', "ASC")->get();        
+        foreach ($employees as $index => $employee) {
+            // Jika email kosong, beri email default
+            // if()
+            // $check = User::where('email', $employee->email)->first();
+            // if($check) continue;
+            // $email = $employee->email ?: 'employee' . ($index + 1) . '@pakarti.com';
+
+            // // Buat user baru dari data employee
+            // $user = User::create([
+            //     'name' => $employee->name,
+            //     'email' => $email,
+            //     'employee_id' => $employee->id,
+            //     'password' => bcrypt('employee123'), // Set default password
+            //     // Kolom lain yang diperlukan untuk user
+            // ]);
+
+            $employee->assignRole('employee');
+        }
+
+        return response()->json([
+            'message' => 'Users created successfully',
+            'data' => $employees,
+        ], 200);
     }
 }

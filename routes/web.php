@@ -17,7 +17,6 @@ use App\Models\Locale;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('{path}', function () {
     $data['locales'] = Locale::latest()->get();
     return view('app', compact('data'));
