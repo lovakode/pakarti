@@ -159,7 +159,6 @@ const fetchData = async ({
     const response = await axios.get(`/attachment`, {
         params: queryParams,
     });
-    params.value.page = response.data.page;
     return response.data;
 };
 

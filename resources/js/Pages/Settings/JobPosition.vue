@@ -161,7 +161,6 @@ const fetchData = async ({
     const response = await axios.get("/settings/job_position", {
         params: queryParams,
     });
-    params.value.page = response.data.page;
     return response.data;
 };
 

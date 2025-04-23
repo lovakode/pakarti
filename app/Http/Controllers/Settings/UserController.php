@@ -22,7 +22,6 @@ class UserController extends Controller
         ->when($request->q, function($q, $search) {
             return $q->where('name', 'LIKE', '%'.$search.'%')
             ->orWhere('email', 'LIKE', '%'.$search.'%')
-            ->orWhere('phone', 'LIKE', '%'.$search.'%')
             ->orWhereHas('roles', function($q) use ($search){
                 $q->where('name', 'LIKE', '%'.$search.'%');
             });

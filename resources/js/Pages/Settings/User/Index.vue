@@ -49,11 +49,6 @@
                         :data="data.data" v-loading="loading">
                         <el-table-column prop="name" :label="$t('common.name')"/>
                         <el-table-column prop="email" :label="$t('common.email')"/>
-                        <el-table-column prop="phone" :label="$t('common.phone')">
-                            <template #default="scope">
-                                {{ scope.row.phone ?? '-' }}
-                            </template>
-                        </el-table-column>
                         <el-table-column :label="$t('base.role')">
                             <template #default="scope">
                                 {{ (scope.row.roles.length) ? scope.row.roles[0].name  : '-'}}
@@ -134,7 +129,6 @@ const fetchData = async ({
     const response = await axios.get("/settings/user", {
         params: queryParams,
     });
-    params.value.page = response.data.page;
     return response.data;
 };
 
@@ -153,7 +147,7 @@ const {
 const doSearch = _.debounce(() => {
     params.value.page = 1;
     refetch();
-}, 2000);
+}, 5000);
 
 const sortChange = () => {
     refetch();

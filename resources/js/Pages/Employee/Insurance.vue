@@ -133,7 +133,6 @@ const fetchData = async ({
     const response = await axios.get(`/insurance`, {
         params: queryParams,
     });
-    params.value.page = response.data.page;
     return response.data;
 };
 

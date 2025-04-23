@@ -165,7 +165,6 @@ const fetchData = async ({
     const response = await axios.get(`/family`, {
         params: queryParams,
     });
-    params.value.page = response.data.page;
     return response.data;
 };
 
