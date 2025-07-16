@@ -129,4 +129,36 @@ class ProfileController extends Controller
         return response()->json($devices);
     }
 
+    public function password(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required|password_confirmation|min:8',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'result' => $validator->errors(),
+            ], 422);
+        }
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return response()->json([
+                'success' => false,
+                'result' => ['old_password' => ['Password tidak sesuai']],
+            ], 422);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'result' => null,
+        ], 200);
+    }
+
 }

@@ -70,14 +70,14 @@
                 </el-form-item>
                 <el-row :gutter="20">
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.birth_date')">
+                        <el-form-item :label="$t('employee.birth_date')" prop="birth_date">
                             <el-date-picker v-model="form.birth_date"
                             format="DD-MM-YYYY"
                             value-format="YYYY-MM-DD" />
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.birth_place')">
+                        <el-form-item :label="$t('employee.birth_place')" prop="birth_place">
                             <el-input v-model="form.birth_place" />
                         </el-form-item>
                     </el-col>
@@ -98,7 +98,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.religion')">
+                        <el-form-item :label="$t('employee.religion')" prop="religion">
                             <el-select v-model="form.religion" class="w-full" :placeholder="$t('common.select')">
                                 <el-option value="islam" :label="$t('employee.islam')"/>
                                 <el-option value="protestant" :label="$t('employee.protestant')"/>
@@ -111,7 +111,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-form-item :label="$t('common.phone')">
+                <el-form-item :label="$t('common.phone')" prop="phone">
                     <el-input v-model="form.phone" />
                 </el-form-item>
 
@@ -206,6 +206,22 @@ const form = ref({
 const formRules = ref({
     name: [
         { required: true, message: t('validation.required', { attribute: t('common.name') }), trigger: 'blur' },
+    ],
+    birth_date: [
+        { required: true, message: t('validation.required', { attribute: t('employee.birth_date') }), trigger: 'blur' },
+    ],
+    birth_place: [
+        { required: true, message: t('validation.required', { attribute: t('employee.birth_place') }), trigger: 'blur' },
+    ],
+    relationship: [
+        { required: true, message: t('validation.required', { attribute: t('employee.relationship') }), trigger: 'blur' },
+    ],
+    phone: [
+        { required: true, message: t('validation.required', { attribute: t('common.phone') }), trigger: 'blur' },
+        { pattern: /^[0-9]+$/, message: t('validation.numeric', { attribute: t('common.phone') }), trigger: 'blur' },
+    ],
+    religion: [
+        { required: true, message: t('validation.required', { attribute: t('employee.religion') }), trigger: 'blur' },
     ]
 });
 const formLoading = ref(false);

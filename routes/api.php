@@ -110,6 +110,8 @@ Route::namespace('App\Http\Controllers')->name('api.')->group(function(){
             Route::get('/{id}/edit','EmployeeController@edit')->name('edit');
             Route::post('/{id}/update','EmployeeController@update')->name('update');
             Route::delete('/{id}/delete','EmployeeController@destroy')->name('delete');
+            Route::get('/export/excel', 'EmployeeController@exportExcel')->name('export.excel');
+            Route::get('/export/pdf', 'EmployeeController@exportPdf')->name('export.pdf');
         });
         
         Route::namespace('Employee')->group(function () {

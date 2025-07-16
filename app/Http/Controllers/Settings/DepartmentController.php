@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Models\Settings\Department;
 
@@ -26,24 +27,53 @@ class DepartmentController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->all());
+        Department::fixTree();
         $sort = !empty($request->sort) ? $request->sort : 'id';
         $sortDir = !empty($request->sortDir) ? $request->sortDir : 'desc';
 
         $query = Department::when(!empty($request->search), function ($q, $search) {
             return $q->orWhere('name', 'LIKE', '%' . $search . '%');
         })
-        ->when($request->tree, function($q){
-            return $q->whereNull('parent_id')
-            ->with(['children']);
-        })
+        // ->when($request->tree, function($q){
+        //     return $q->whereNull('parent_id')
+        //     ->with(['children' => function($q2){
+        //         $q2->with(['children' => function ($q3){
+        //             $q3->with('children');
+        //         }
+        //         ]);
+        //     }]);
+        // })
         ->withCount('employee')
-        ->orderBy($sort, $sortDir);
+        ->when(!isset($request->tree), function($q){
+            $q->orderBy($sort, $sortDir);
+        });
 
         if($request->limit){
-            $data = $query->paginate($request->limit);
+            if($request->tree){
+                $allData = $query->withDepth()->get()->toTree();$currentPage = LengthAwarePaginator::resolveCurrentPage();
+                
+                $perPage = $request->limit;
+                $currentItems = $allData->slice(($currentPage - 1) * $perPage, $perPage);
+                $data = new LengthAwarePaginator(
+                    $currentItems,
+                    $allData->count(),
+                    $perPage,
+                    $currentPage,
+                    ['path' => LengthAwarePaginator::resolveCurrentPath()]
+                );
+            }else{
+                $data = $query->paginate($request->limit);
+            }
         }else{
-            $data = $query->get();
+            if($request->tree){
+                $data = $query->withDepth()->get()->toTree();
+            }else{
+                $data = $query->get();
+            }
         }
+        // $data = Department::withDepth()->get()->toTree();
+
         return response()->json($data);
     }
 

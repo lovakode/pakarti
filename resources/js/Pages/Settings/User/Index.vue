@@ -25,9 +25,7 @@
                 <div class="flex items-center gap-2">
                     <el-input
                         v-model="params.q"
-                        @input="doSearch"
                         clearable
-                        :disabled="isLoading"
                         >
                         <template #prefix>
                             <Icon icon="mingcute:search-line"/>
@@ -46,7 +44,7 @@
                 </template>
                 <template #default>
                     <el-table class="min-w-full" 
-                        :data="data.data" v-loading="loading">
+                        :data="data.data">
                         <el-table-column prop="name" :label="$t('common.name')"/>
                         <el-table-column prop="email" :label="$t('common.email')"/>
                         <el-table-column :label="$t('base.role')">
@@ -98,7 +96,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted, watch } from 'vue';
 import axios from 'axios';
 import { ElMessageBox, ElMessage } from 'element-plus';
 import { Icon } from '@iconify/vue';
@@ -121,6 +119,13 @@ const params = ref({
     q : ""
 });
 
+watch(
+  () => params.value.q,
+  _.debounce(()=> {
+    params.value.page = 1;
+    refetch();
+  }, 1000)
+);
 
 const fetchData = async ({
     queryKey
@@ -143,11 +148,6 @@ const {
     queryFn: fetchData,
     keepPreviousData: true,
 });
-
-const doSearch = _.debounce(() => {
-    params.value.page = 1;
-    refetch();
-}, 5000);
 
 const sortChange = () => {
     refetch();
@@ -182,4 +182,5 @@ const onDelete = (id) => {
         });
     });
 };
+
 </script>

@@ -79,7 +79,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.degree')">
+                        <el-form-item :label="$t('employee.degree')" prop="degree">
                             <el-select v-model="form.degree" class="w-full" :placeholder="$t('common.select')">
                                 <el-option value="elementary_school" :label="$t('employee.elementary_school')"/>
                                 <el-option value="junior_high_school" :label="$t('employee.junior_high_school')"/>
@@ -91,24 +91,24 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.field_of_study')">
+                        <el-form-item :label="$t('employee.field_of_study')" prop="field_of_study">
                             <el-input v-model="form.field_of_study" />
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.grade')">
+                        <el-form-item :label="$t('employee.grade')" prop="grade">
                             <el-input v-model="form.grade" />
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.graduation_date')">
+                        <el-form-item :label="$t('employee.graduation_date')" prop="graduation_date">
                             <el-date-picker v-model="form.graduation_date" class="!w-full"
                             format="DD-MM-YYYY"
                             value-format="YYYY-MM-DD" />
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.document')">
+                        <el-form-item :label="$t('employee.document')" prop="file">
                            <input-file v-model="form.file" />
                         </el-form-item>
                     </el-col>
@@ -206,8 +206,23 @@ const form = ref({
 
 
 const formRules = ref({
-    name: [
-        { required: true, message: t('validation.required', { attribute: t('common.name') }), trigger: 'blur' },
+    institution: [
+        { required: true, message: t('validation.required', { attribute: t('employee.institution') }), trigger: 'blur' },
+    ],
+    degree: [
+        { required: true, message: t('validation.required', { attribute: t('employee.degree') }), trigger: 'change' },
+    ],
+    field_of_study: [
+        { required: true, message: t('validation.required', { attribute: t('employee.field_of_study') }), trigger: 'blur' },
+    ],
+    grade: [
+        { required: true, message: t('validation.required', { attribute: t('employee.grade') }), trigger: 'blur' },
+    ],
+    graduation_date: [
+        { required: true, message: t('validation.required', { attribute: t('employee.graduation_date') }), trigger: 'blur' },
+    ],
+    file: [
+        { required: true, message: t('validation.required', { attribute: t('employee.document') }), trigger: 'blur' },
     ]
 });
 const formLoading = ref(false);

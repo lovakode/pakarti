@@ -11,5 +11,8 @@
     "delete_error" : "An error occurred while deleting the data. Please try again later",
     "delete_cancel" : "Deletion has been canceled",
     "success_save" : "Data has been successfully saved",
-    "product_out_of_stock" : "Out of stock! Please select another product"
+    "product_out_of_stock" : "Out of stock! Please select another product",
+    "export_success" : "Export completed successfully",
+    "export_failed" : "Export failed. Please try again",
+    "select_columns_first" : "Please select at least one column to export"
 }

@@ -24,6 +24,10 @@
                 </el-select>
 
                 <div class="flex items-center gap-2">
+                    <el-button type="primary" plain @click.prevent="showExportModal = true">
+                        <Icon icon="mingcute:download-line" class="me-2"/>
+                        {{ $t('common.export') }}
+                    </el-button>
                     <el-button type="primary" 
                     :disabled="isLoading" @click.prevent="filterShow = !filterShow" 
                     :plain="filterShow">
@@ -101,7 +105,7 @@
                     <el-table class="!w-full"
                         scrollbar-always-on
                         :data="data.data" @sort-change="sortChange">
-                        <el-table-column prop="name" :label="$t('common.name')">
+                        <el-table-column prop="name" :label="$t('common.name')" sortable>
                             <template #default="scope">
                                 <div class="flex">
                                     <el-image 
@@ -157,6 +161,9 @@
                         <el-table-column prep="status" :label="$t('common.status')" sortable width="140">
                             <template #default="scope">
                                 {{ scope.row.status ? $t(`employee.${scope.row.status}`) : '-' }}
+                                <div class="text-xs" v-if="['resigned', 'retired'].includes(scope.row.status)">
+                                    {{ formatDate(scope.row.exit_date) }}
+                                </div>
                             </template>
                         </el-table-column>
                         <el-table-column :label="$t('common.action')" align="center" width="120">
@@ -206,6 +213,13 @@
                 </template>
             </el-skeleton>
         </el-card>
+
+        <!-- Export Modal -->
+        <modal-export-employee 
+            v-model="showExportModal"
+            :current-filters="getCurrentFilters()"
+            @exported="onExported"
+        />
     </div>
 </template>
 
@@ -224,8 +238,11 @@ import SelectDepartment from '@/Components/Form/SelectDepartment.vue';
 import SelectJobPosition from '@/Components/Form/SelectJobPosition.vue';
 import SelectExpertise from '@/Components/Form/SelectExpertise.vue';
 import SelectEmployee from '@/Components/Form/SelectEmployee.vue';
+import ModalExportEmployee from '@/Components/Modal/ModalExportEmployee.vue';
 import { useAbility } from '@casl/vue';
+import { useFormatter } from '@/Composable/useFormatter';
 
+const { formatDate } = useFormatter();
 const { t } = useI18n();
 const { can } = useAbility();
 const { setTitle } = useHead();
@@ -235,10 +252,13 @@ onMounted(() => {
 });
 
 const filterShow = ref(false);
+const showExportModal = ref(false);
 const params = ref({
     limit: 25,
     page : 1,
     q : "",
+    sort : null,
+    sortDir : null,
     name : null,
     code : null,
     status : null,
@@ -285,7 +305,10 @@ const doSearch = _.debounce(() => {
     refetch();
 }, 1000);
 
-const sortChange = () => {
+const sortChange = (data) => {
+    // console.log(data);
+    params.value.sort = data.prop;
+    params.value.sortDir = data.order == 'descending' ? 'DESC' : 'ASC';
     refetch();
 }
 
@@ -318,5 +341,22 @@ const onDelete = (id) => {
             message: t('message.delete_cancel')
         });
     });
+};
+
+const getCurrentFilters = () => {
+    return {
+        q: params.value.q,
+        name: params.value.name,
+        code: params.value.code,
+        status: params.value.status,
+        dept: params.value.dept,
+        pst: params.value.pst,
+        superior: params.value.superior
+    };
+};
+
+const onExported = () => {
+    // Optional: You can add any post-export actions here
+    console.log('Export completed successfully');
 };
 </script>

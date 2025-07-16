@@ -122,5 +122,20 @@
     "device" : "Device | Devices",
     "devices_connected" : "Devices Connected",
     "department_stats" : "Department Chart",
-    "status_stats" : "Status Chart"
+    "status_stats" : "Status Chart",
+    "export" : "Export",
+    "export_format" : "Export Format",
+    "export_options" : "Export Options",
+    "export_all_data" : "Export All Data",
+    "use_current_filters" : "Use Current Filters",
+    "columns_to_export" : "Columns to Export",
+    "export_note" : "Select the columns you want to include in the export file",
+    "export_description" : "Choose your preferred format and customize the export settings",
+    "excel_description" : "Spreadsheet format for data analysis",
+    "pdf_description" : "Document format for reports and printing",
+    "current_filters_desc" : "Apply current table filters to exported data",
+    "select_all" : "Select All",
+    "clear_all" : "Clear All",
+    "columns_selected" : "{count} of {total} columns selected",
+    "export_time_note" : "Export may take a moment for large datasets"
 }

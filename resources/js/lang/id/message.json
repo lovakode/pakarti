@@ -10,5 +10,8 @@
     "delete_error": "Terjadi kesalahan saat menghapus data. Silakan coba lagi nanti",
     "delete_cancel": "Penghapusan dibatalkan",
     "success_save": "Data berhasil disimpan",
-    "product_out_of_stock": "Stok habis! Silakan pilih produk lain"
+    "product_out_of_stock": "Stok habis! Silakan pilih produk lain",
+    "export_success": "Ekspor berhasil diselesaikan",
+    "export_failed": "Ekspor gagal. Silakan coba lagi",
+    "select_columns_first": "Silakan pilih setidaknya satu kolom untuk diekspor"
 }

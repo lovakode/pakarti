@@ -122,6 +122,21 @@
     "device" : "Perangkat | Perangkat",
     "devices_connected" : "Perangkat Terhubung",
     "department_stats" : "Department Chart",
-    "status_stats" : "Status Chart"
+    "status_stats" : "Status Chart",
+    "export" : "Ekspor",
+    "export_format" : "Format Ekspor",
+    "export_options" : "Opsi Ekspor",
+    "export_all_data" : "Ekspor Semua Data",
+    "use_current_filters" : "Gunakan Filter Saat Ini",
+    "columns_to_export" : "Kolom yang Diekspor",
+    "export_note" : "Pilih kolom yang ingin Anda sertakan dalam file ekspor",
+    "export_description" : "Pilih format yang diinginkan dan sesuaikan pengaturan ekspor",
+    "excel_description" : "Format spreadsheet untuk analisis data",
+    "pdf_description" : "Format dokumen untuk laporan dan pencetakan",
+    "current_filters_desc" : "Terapkan filter tabel saat ini ke data yang diekspor",
+    "select_all" : "Pilih Semua",
+    "clear_all" : "Hapus Semua",
+    "columns_selected" : "{count} dari {total} kolom dipilih",
+    "export_time_note" : "Ekspor mungkin membutuhkan waktu untuk dataset yang besar"
     
 }

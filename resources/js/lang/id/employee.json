@@ -103,5 +103,8 @@
     "driving_license" : "SIM",
     "visa_work_permit" : "Visa & Work Permit",
     "identity_number" : "Nomor Identitas",
-    "attachment_note" : "Jika tidak ada dalam daftar, Anda dapat mengetik jenis lampiran baru"
+    "attachment_note" : "Jika tidak ada dalam daftar, Anda dapat mengetik jenis lampiran baru",
+    "emergency_contact" : "Kontak Darurat",
+    "retired" : "Pensiun",
+    "resigned" : "Mengundurkan Diri"
 }

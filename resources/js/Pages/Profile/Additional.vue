@@ -23,6 +23,9 @@
     <el-card class="shadow-sm sm:rounded-lg mb-4" body-class="!p-0">
         <medical :employee="user.employee_id" header-class="px-4"/>
     </el-card>
+    <el-card class="shadow-sm sm:rounded-lg mb-4" body-class="!p-0">
+        <attachment :employee="user.employee_id" header-class="px-4"/>
+    </el-card>
 </template>
 
 <script setup>
@@ -37,6 +40,7 @@ import Agreement from '../Employee/Agreement.vue';
 import Certification from '../Employee/Certification.vue';
 import Insurance from '../Employee/Insurance.vue';
 import Medical from '../Employee/Medical.vue';
+import Attachment from '../Employee/Attachment.vue';
 import { useAuthStore } from '@/Stores/auth';
 
 const { t } = useI18n();

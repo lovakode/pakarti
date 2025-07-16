@@ -11,7 +11,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col :md="8">
-                    <el-form-item :label="$t('common.image')">
+                    <el-form-item :label="$t('common.image')" prop="image">
                         <image-upload v-model="form.image" size="small"/>
                     </el-form-item>
                 </el-col>
@@ -56,7 +56,10 @@ const formRules = ref({
     ],
     email: [
         { required: true, message: t('validation.required', { attribute: t('common.email') }), trigger: 'blur' },
-    ]
+    ],
+    image: [
+        { required: true, message: t('validation.required', { attribute: t('common.image') }), trigger: 'blur' },
+    ],
 });
 
 const onSubmit = async () => {

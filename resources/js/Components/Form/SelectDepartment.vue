@@ -4,7 +4,7 @@
     class="w-full"
     v-model="value"
     check-strictly
-    :data="dataList"
+    :data="data"
     :render-after-expand="false"
     @change="selectChange"
     :props="defaultProps"
@@ -12,8 +12,9 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch } from 'vue';
 import axios from 'axios';
+import { useQuery } from '@tanstack/vue-query';
 
 const emit = defineEmits(['update:modelValue'])
 // Define props
@@ -33,37 +34,59 @@ const defaultProps =  {
 // Define data
 const dataList = ref([]);
 const value = ref(props.modelValue);
-const isLoading = ref(false);
+// const isLoading = ref(false);
 
 // Watch for changes to modelValue
 watch(() => props.modelValue, (newValue) => {
     value.value = newValue;
 });
 
-// Fetch data on mounted
-const fetchData = async () => {
-    try {
-        isLoading.value = true;
-        const response = await axios.get("/settings/department",{
-            params : {
-                tree : true
-            }
-        });
-        if (response.status === 200) {
-            dataList.value = response.data;
-        }
-        isLoading.value = false;
-    } catch (error) {
-    }
+const fetchData = async ({
+    queryKey
+}) => {
+    const [_key, queryParams] = queryKey;
+    const response = await axios.get("/settings/department", {
+        params: {
+            tree : true
+        },
+    });
+    return response.data;
 };
 
-onMounted(() => {
-    fetchData();
+const {
+    data,
+    isLoading,
+    isError,
+    error,
+    refetch
+} = useQuery({
+    queryKey: ['selectDepartment'], // Query key unik
+    queryFn: fetchData,
+    keepPreviousData: true,
 });
+// // Fetch data on mounted
+// const fetchData = async () => {
+//     try {
+//         isLoading.value = true;
+//         const response = await axios.get("/settings/department",{
+//             params : {
+//                 tree : true
+//             }
+//         });
+//         if (response.status === 200) {
+//             dataList.value = response.data;
+//         }
+//         isLoading.value = false;
+//     } catch (error) {
+//     }
+// };
+
+// onMounted(() => {
+//     fetchData();
+// });
 
 // Emit value change
 const selectChange = (newValue) => {
-    console.log(newValue);
     value.value = newValue;
     emit('update:modelValue', newValue);
 };

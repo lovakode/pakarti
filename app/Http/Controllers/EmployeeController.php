@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Hash;
 // use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Employee;
 use App\Http\Requests\Sale\CustomerRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use Spatie\LaravelPdf\Facades\Pdf;
+use App\Exports\EmployeeExport;
 
 class EmployeeController extends Controller
 {
@@ -263,5 +266,54 @@ class EmployeeController extends Controller
         return response()->json([
             'success' => true,
         ], 200);
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $params = $request->all();
+        $filename = 'employee_export_' . date('Y-m-d_H-i-s') . '.xlsx';
+        
+        return Excel::download(new EmployeeExport($params), $filename);
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $params = $request->all();
+        $columns = isset($params['columns']) ? explode(',', $params['columns']) : [
+            'code', 'name', 'email', 'phone', 'gender', 'birth_date', 
+            'department', 'job_position', 'grade', 'status', 'join_date'
+        ];
+        
+        $query = Employee::with(['department', 'job_position', 'grade', 'expertise'])
+            ->when($request->q, function($query, $search){
+                $query->where('name', 'LIKE', '%' . $search . '%')
+                ->orWhere('phone', 'LIKE', '%' . $search . '%');
+            })
+            ->when($request->name, function($q, $search){
+                $q->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->when($request->code, function($q, $search){
+                $q->where('code', 'LIKE', '%' . $search . '%');
+            })
+            ->when($request->status, function($q, $search){
+                $q->where('status', $search);
+            })
+            ->when($request->dept, function($q, $search){
+                $q->where('department_id', $search);
+            })
+            ->when($request->pst, function($q, $search){
+                $q->where('job_position_id', $search);
+            })
+            ->when($request->superior, function($q, $search){
+                $q->where('superior_id', $search);
+            });
+
+        $employees = $query->get();
+        
+        $pdf = Pdf::view('exports.employee', compact('employees', 'columns'))
+            ->format('a4')
+            ->orientation('landscape');
+            
+        return $pdf->download('employee_export_' . date('Y-m-d_H-i-s') . '.pdf');
     }
 }

@@ -100,12 +100,12 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('common.description')">
+                        <el-form-item :label="$t('common.description')" prop="description">
                             <el-input v-model="form.description" />
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.document')">
+                        <el-form-item :label="$t('employee.document')" prop="file">
                            <input-file v-model="form.file" />
                         </el-form-item>
                     </el-col>
@@ -218,6 +218,9 @@ const formRules = ref({
     to: [
         { required: true, message: t('validation.required', { attribute: t('common.to') }), trigger: 'blur' },
     ],
+    description: [
+        { required: true, message: t('validation.required', { attribute: t('common.description') }), trigger: 'blur' },
+    ]
 });
 const formLoading = ref(false);
 const openModal = () => {

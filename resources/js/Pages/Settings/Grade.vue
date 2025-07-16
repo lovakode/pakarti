@@ -27,7 +27,6 @@
                 <div class="flex items-center gap-2">
                     <el-input
                         v-model="params.q"
-                        @input="doSearch"
                         clearable
                         :disabled="isLoading"
                         >
@@ -125,7 +124,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch  } from 'vue';
 import axios from 'axios';
 import { ElMessageBox, ElMessage, ElLoading } from 'element-plus';
 import { Icon } from '@iconify/vue';
@@ -154,6 +153,14 @@ const selected = ref([]);
 const onSelectionChange = (val) => {
     selected.value = val
 }
+
+watch(
+  () => params.value.q,
+  _.debounce(()=> {
+    params.value.page = 1;
+    refetch();
+  }, 500)
+);
 
 const fetchData = async ({
     queryKey

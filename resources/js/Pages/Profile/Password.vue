@@ -4,13 +4,13 @@
             <el-row :gutter="20">
                 <el-col :md="12">
                     <el-form-item :label="$t('common.old_password')" :error="errors.old_password">
-                        <el-input v-model="form.old_password" />
+                        <el-input v-model="form.old_password" type="password" show-password clearable/>
                     </el-form-item>
                     <el-form-item :label="$t('common.new_password')" :error="errors.new_password">
-                        <el-input v-model="form.new_password" />
+                        <el-input v-model="form.new_password"  type="password" show-password clearable/>
                     </el-form-item>
                     <el-form-item :label="$t('common.new_password_confirmation')" :error="errors.password_confirmation">
-                        <el-input v-model="form.password_confirmation" />
+                        <el-input v-model="form.password_confirmation" type="password" show-password clearable />
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -52,7 +52,6 @@ const onSubmit = async () => {
     const url = '/profile/password';
     try {
         const response = await axios.post(url, form.value);
-        console.log(response.data.result);
         ElMessage({message: t('success_msg'), type: 'success'});
     } catch (error) {
         errors.value = error.validation;

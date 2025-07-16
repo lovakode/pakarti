@@ -77,7 +77,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="24">
-                        <el-form-item :label="$t('employee.document')">
+                        <el-form-item :label="$t('employee.document')" prop="file">
                            <input-file v-model="form.file" />
                         </el-form-item>
                     </el-col>
@@ -176,7 +176,10 @@ const formRules = ref({
     ],
     card_no: [
         { required: true, message: t('validation.required', { attribute: t('employee.card_no') }), trigger: 'blur' },
-    ]
+    ],
+    file: [
+        { required: true, message: t('validation.required', { attribute: t('employee.document') }), trigger: 'change' },
+    ],
 });
 const formLoading = ref(false);
 const openModal = () => {

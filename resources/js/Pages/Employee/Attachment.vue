@@ -102,7 +102,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="24">
-                        <el-form-item :label="$t('common.description')">
+                        <el-form-item :label="$t('common.description')" prop="description">
                            <el-input type="textarea" v-model="form.description" :rows="3"/>
                         </el-form-item>
                     </el-col>
@@ -201,7 +201,19 @@ const form = ref({
 const formRules = ref({
     type: [
         { required: true, message: t('validation.required', { attribute: t('common.type') }), trigger: 'blur' },
-    ]
+    ],
+    identity_number: [
+        { required: true, message: t('validation.required', { attribute: t('employee.identity_number') }), trigger: 'blur' },
+    ],
+    valid_date: [
+        { required: true, message: t('validation.required', { attribute: t('employee.valid_date') }), trigger: 'blur' },
+    ],
+    document: [
+        { required: true, message: t('validation.required', { attribute: t('employee.document') }), trigger: 'change' },
+    ],
+    description: [
+        { required: true, message: t('validation.required', { attribute: t('common.description') }), trigger: 'blur' },
+    ],
 });
 const formLoading = ref(false);
 const openModal = () => {

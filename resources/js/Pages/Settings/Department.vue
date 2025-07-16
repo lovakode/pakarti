@@ -63,11 +63,6 @@
                                 {{ scope.row.employee_count }}
                             </template>
                         </el-table-column>
-                        <el-table-column :label="$t('common.created_at')">
-                            <template #default="scope">
-                                {{ formatDate(scope.row.created_at) }}
-                            </template>
-                        </el-table-column>
                         <el-table-column :label="$t('common.action')" align="center" width="150">
                             <template #default="scope">
                                 <el-dropdown popper-class="dropdown-action" trigger="click" >
