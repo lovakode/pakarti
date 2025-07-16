@@ -46,15 +46,15 @@ export default defineConfig({
             '~modules': path.resolve(__dirname, 'modules'), // Alias ke folder modul di root
         },
     },
-    server: {
-      hmr: {
-        host: 'pakarti.local',
-      },
-      https: {
-          key: 'D:/laragon/etc/ssl/laragon.key',
-          cert: 'D:/laragon/etc/ssl/laragon.crt',
-      },
-    },
+    // server: {
+    //   hmr: {
+    //     host: 'pakarti.local',
+    //   },
+    //   https: {
+    //       key: 'D:/laragon/etc/ssl/laragon.key',
+    //       cert: 'D:/laragon/etc/ssl/laragon.crt',
+    //   },
+    // },
     build: {
         rollupOptions: {
             output:{
