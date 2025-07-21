@@ -17,3 +17,6 @@ yarn-error.log
 /.idea
 /.vscode
 node_modules.zip
+public/build.zip
+pakarti.zip
+/public/uploads/*

@@ -97,7 +97,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="12">
-                        <el-form-item :label="$t('employee.document')" prop="document">
+                        <el-form-item :label="$t('employee.document')" prop="file">
                            <input-file v-model="form.file" />
                         </el-form-item>
                     </el-col>
@@ -208,7 +208,7 @@ const formRules = ref({
     valid_date: [
         { required: true, message: t('validation.required', { attribute: t('employee.valid_date') }), trigger: 'blur' },
     ],
-    document: [
+    file: [
         { required: true, message: t('validation.required', { attribute: t('employee.document') }), trigger: 'change' },
     ],
     description: [
