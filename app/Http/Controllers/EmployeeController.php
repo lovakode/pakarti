@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Employee;
 use App\Http\Requests\Sale\CustomerRequest;
 use Maatwebsite\Excel\Facades\Excel;
-use Spatie\LaravelPdf\Facades\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\EmployeeExport;
 
 class EmployeeController extends Controller
@@ -310,9 +310,7 @@ class EmployeeController extends Controller
 
         $employees = $query->get();
         
-        $pdf = Pdf::view('exports.employee', compact('employees', 'columns'))
-            ->format('a4')
-            ->orientation('landscape');
+        $pdf = Pdf::loadView('exports.employee', compact('employees', 'columns'))->setPaper('a4', 'landscape');
             
         return $pdf->download('employee_export_' . date('Y-m-d_H-i-s') . '.pdf');
     }

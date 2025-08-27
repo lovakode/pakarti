@@ -16,7 +16,7 @@
                             <div class="text-sm mb-0">
                                 <!-- <i class="ti ti-square-filled text-primary fs-12 me-2"></i> -->
                                 {{ d.status === 'Undefined' ? d.status : $t(`employee.${d.status}`) }}
-                                <span class="text-gray-9">(48%)</span></div>
+                                <span class="text-gray-9">{{ d.percentage }}</span></div>
                             <h2 class="text-lg">{{ d.total }}</h2>
                         </div>
                     </el-col>
@@ -47,6 +47,7 @@ const chartData = {
         },
     ],
 };
+
 
 const chartOptions = {
     responsive: true,

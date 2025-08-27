@@ -138,21 +138,6 @@
                                 </div>
                             </template>
                         </el-table-column>
-                        <!-- <el-table-column prep="department.name" :label="$t('base.department')" width="200" sortable>
-                            <template #default="scope">
-                                {{ scope.row.department ? scope.row.department.name : '-' }}
-                            </template>
-                        </el-table-column>
-                        <el-table-column prep="job_position.name" :label="$t('base.job_position')" width="170" sortable>
-                            <template #default="scope">
-                                {{ scope.row.job_position ? scope.row.job_position.name : '-' }}
-                            </template>
-                        </el-table-column>
-                        <el-table-column prep="grade.name" :label="$t('base.grade')" sortable width="110">
-                            <template #default="scope">
-                                {{ scope.row.grade ? scope.row.grade.name : '-' }}
-                            </template>
-                        </el-table-column> -->
                         <el-table-column prep="ptkp" :label="$t('employee.ptkp')" sortable width="90">
                             <template #default="scope">
                                 {{ scope.row.ptkp ?? '-' }}

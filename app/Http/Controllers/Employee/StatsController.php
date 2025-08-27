@@ -21,9 +21,20 @@ class StatsController extends Controller
     public function status()
     {
         $stats = Employee::selectRaw("IFNULL(status, 'Undefined') AS status, COUNT(*) AS total")
-        ->groupBy('status')
-        ->get();
-
+            ->groupBy('status')
+            ->get();
+    
+        // Hitung total keseluruhan
+        $grandTotal = $stats->sum('total');
+    
+        // Tambahkan persentase ke setiap item
+        $stats = $stats->map(function ($item) use ($grandTotal) {
+            $item->percentage = $grandTotal > 0 
+                ? round(($item->total / $grandTotal) * 100, 2) . '%' 
+                : '0%';
+            return $item;
+        });
+    
         return response()->json($stats);
     }
 
